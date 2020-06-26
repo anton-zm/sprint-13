@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cardsRoute = require('./routes/cards');
+const usersRoute = require('./routes/users');
 
 const { PORT = 3000 } = process.env;
 
@@ -26,9 +28,9 @@ const urlNotFound = (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/cards', require('./routes/cards'));
+app.use('/cards', cardsRoute);
 
-app.use('/users', require('./routes/users'));
+app.use('/users', usersRoute);
 
 app.use((req, res, next) => {
   req.user = {
