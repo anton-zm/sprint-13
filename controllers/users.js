@@ -20,3 +20,16 @@ module.exports.createUser = (req, res) => {
     .then((users) => res.send({ data: users }))
     .catch((err) => res.status(500).send({ message: err }));
 };
+module.exports.updateProfile = (req, res) => {
+  user
+    .findByIdAndUpdate(req.user._id, { name: 'Anton Zmanovskii', about: 'Web Developer' })
+    .then((users) => res.send({ data: users }))
+    .catch((err) => res.status(500).send({ message: err }));
+};
+
+module.exports.updateAva = (req, res) => {
+  user
+    .findByIdAndUpdate(req.user._id, { avatar: 'https://balkony34.ru/wp-content/uploads/me.jpg' })
+    .then((users) => res.send({ data: users }))
+    .catch((err) => res.status(500).send({ message: err }));
+};

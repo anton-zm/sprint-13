@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cardsRoute = require('./routes/cards');
@@ -26,19 +25,17 @@ const urlNotFound = (req, res) => {
   }
 };
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use((req, res, next) => {
+  req.user = {
+    _id: '5ef4849f8d7b8e29008fe98b',
+  };
+  next();
+});
 
 app.use('/cards', cardsRoute);
 
 app.use('/users', usersRoute);
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: '5ef4849f8d7b8e29008fe98b',
-  };
-
-  next();
-});
-
 app.use(urlNotFound);
+
 app.listen(PORT);

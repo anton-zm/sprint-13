@@ -7,6 +7,15 @@ module.exports.getCards = (req, res) => {
     .catch(() => res.status(500).send({ message: 'Что-то пошло не так' }));
 };
 module.exports.createCard = (req, res) => {
-  // console.log(req.user._id);
-  card.create({ name: 'Test', link: 'test.link', owner: 'owner' }).then((cards) => res.send({ data: cards }));
+  const { name, link } = req.body;
+  card
+    .create({ name, link, owner: req.user._id })
+    .then((cards) => res.send({ data: cards }))
+    .catch(() => res.status(500).send({ message: 'Что-то пошло не так' }));
+};
+module.exports.deleteCard = (req, res) => {
+  card
+    .findByIdAndRemove(req.params.cardId)
+    .then((cards) => res.send({ data: cards }))
+    .catch(() => res.status(500).send({ message: 'Что-то пошло не так' }));
 };

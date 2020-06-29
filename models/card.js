@@ -19,13 +19,12 @@ const cardsSchema = new mongoose.Schema({
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'cards',
     required: true,
   },
-  // likes: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   default: [],
-  // },
+  likes: {
+    default: [],
+  },
   createdAt: {
     type: Date,
     default: Date.now,
