@@ -13,12 +13,6 @@ module.exports.createCard = (req, res) => {
     .then((cards) => res.send({ data: cards }))
     .catch(() => res.status(500).send({ message: 'Что-то пошло не так' }));
 };
-module.exports.deleteCard = (req, res) => {
-  card
-    .findByIdAndRemove(req.params.cardId)
-    .then((cards) => res.send({ data: cards }))
-    .catch(() => res.status(500).send({ message: 'Что-то пошло не так' }));
-};
 
 module.exports.deleteCard = async function findByIdAndRemove(req, res) {
   const Card = await card.findByIdAndRemove(req.params.cardId);
