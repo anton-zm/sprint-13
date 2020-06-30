@@ -7,16 +7,18 @@ module.exports.getUsers = (req, res) => {
     .catch(() => res.status(500).send({ message: 'Что-то пошло не так' }));
 };
 
-module.exports.getUser = (req, res) => {
-  user
-    .findById(req.params.userId)
-    .then((users) => res.send({ data: users }))
-    .catch(() => res.status(404).send({ message: 'Нет пользователя с таким id' }));
-};
 module.exports.createUser = (req, res) => {
   const { name, about, avatar } = req.body;
   user
     .create({ name, about, avatar })
     .then((users) => res.send({ data: users }))
     .catch((err) => res.status(500).send({ message: err }));
+};
+
+module.exports.getUser = async function findById(req, res) {
+  const User = await user.findById(req.params.userId);
+  if (User == null) {
+    res.status(404).send({ message: 'Пользователь не найден' });
+  }
+  res.send({ User });
 };
