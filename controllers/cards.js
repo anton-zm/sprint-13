@@ -18,6 +18,7 @@ module.exports.deleteCard = async function findByIdAndRemove(req, res) {
   const Card = await card.findByIdAndRemove(req.params.cardId);
   if (Card == null) {
     res.status(404).send({ message: 'Карточка не найдена' });
+  } else {
+    res.send({ Card });
   }
-  res.send({ Card });
 };

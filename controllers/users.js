@@ -19,6 +19,7 @@ module.exports.getUser = async function findById(req, res) {
   const User = await user.findById(req.params.userId);
   if (User == null) {
     res.status(404).send({ message: 'Пользователь не найден' });
+  } else {
+    res.send({ User });
   }
-  res.send({ User });
 };
