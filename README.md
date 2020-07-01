@@ -24,8 +24,8 @@
 
 1. Установить зависимости
 
-\$ npm install
+`$ npm install`
 
 2. Запустить локально (доступно на localhost:3000)
 
-\$ npm run dev
+`$ npm run dev`
