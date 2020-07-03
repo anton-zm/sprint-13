@@ -1,11 +1,11 @@
-const usersRouter = require("express").Router();
+const usersRouter = require('express').Router();
 
-const path = require("path");
+const { getUsers, getUser, createUser } = require('../controllers/users');
 
-const usersArray = path.join(__dirname, "../data/users.json");
+usersRouter.get('/', getUsers);
 
-usersRouter.get("/users", (req, res) => {
-  res.send(usersArray);
-});
+usersRouter.get('/:userId', getUser);
+
+usersRouter.post('/', createUser);
 
 module.exports = usersRouter;
